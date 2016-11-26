@@ -15,6 +15,7 @@ namespace BackEndWpf
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Name { get; set; }
+
         public bool IsSelected
         {
             get
