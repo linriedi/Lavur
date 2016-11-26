@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using Sync;
 using System.Reflection;
-using System.Linq;
 
 namespace BackEndWpf
 {
@@ -32,7 +31,7 @@ namespace BackEndWpf
             {
                 var point = (SyncPoint)info.GetValue(null);
                 var fieldName = info.Name;
-                SyncPoints.Add(new ViewModel(fieldName, point));
+                this.SyncPoints.Add(new ViewModel(fieldName, point));
             }
         }
     }
