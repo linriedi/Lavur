@@ -11,6 +11,12 @@ namespace BackEnd
         static void Main(string[] args)
         {
             Console.WriteLine("Backend started");
+
+            Application.EnableVisualStyles();
+            //Application.Run(new Form1());
+
+            //var ui = new DebugConsole();
+
             Console.Read();
         }
     }
