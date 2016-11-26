@@ -1,41 +1,13 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows;
-using Service;
+﻿using System.Windows;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
-using Sync;
 
 namespace BackEndWpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
         public ObservableCollection<ViewModel> AllActivities { get; set; }
 
         private readonly Service.Service service;
-
-        private bool test;
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        //public bool Test
-        //{
-        //    get
-        //    {
-        //        Sync.SyncPointConnection.First.Release();
-        //        return this.test;
-        //    }
-        //    set
-        //    {
-        //        this.test = value;
-        //        RaisePropertyChanged("Test");
-        //    }
-        //}
-
-        //public List<ViewModel> viewModels { get; private set; }
 
         public MainWindow()
         {
@@ -44,18 +16,11 @@ namespace BackEndWpf
             this.DataContext = this;
             this.service = new Service.Service();
             this.AllActivities = new ObservableCollection<ViewModel>();
-
-            //this.BindToSyncPoints();
-            //this.viewModels = new List<ViewModel>
-            //{
-            //    new ViewModel("First", false),
-            //    new ViewModel("Second", true),
-            //};
-
-            LoadAllActivities();
+                      
+            this.CreateList();
         }
 
-        private void LoadAllActivities()
+        private void CreateList()
         {
             var point = Sync.SyncPointConnection.First;
             AllActivities.Add(new ViewModel(point));
@@ -65,24 +30,5 @@ namespace BackEndWpf
             //    AllActivities.Add(activity);
             //}
         }
-
-        //private void BindToSyncPoints()
-        //{
-        //    Sync.SyncPointConnection.First.Blocked += OnFirstSignaled;
-        //}
-
-        //private void OnFirstSignaled(object sender, EventArgs e)
-        //{
-        //    this.Test = true;
-        //}
-
-        //private void RaisePropertyChanged(string propertyName)
-        //{
-        //    var temp = this.PropertyChanged;
-        //    if (temp != null)
-        //    {
-        //        temp(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
     }
 }
