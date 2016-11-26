@@ -7,8 +7,10 @@ namespace BackEndWpf
     public class ViewModel : INotifyPropertyChanged
     {
         private SyncPoint point;
+
         private bool isSelected;
         private bool isActivated;
+        private int count;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,6 +49,19 @@ namespace BackEndWpf
             }
         }
 
+        public int Count
+        {
+            get
+            {
+                return this.count;
+            }
+            set
+            {
+                this.count = value;
+                this.RaisePropertyChanged(nameof(this.Count));
+            }
+        }
+
         public ViewModel(string name, SyncPoint point)
         {
             this.point = point;
@@ -61,6 +76,7 @@ namespace BackEndWpf
         private void OnBlocked(object sender, EventArgs e)
         {
             this.IsSelected = true;
+            this.Count = point.Count;
         }
 
         private void OnReleased(object sender, EventArgs e)

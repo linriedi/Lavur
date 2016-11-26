@@ -14,18 +14,26 @@
                         <TextBlock Text="{Binding Path=Name, Mode=TwoWay}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <CheckBox
                                 Grid.Column="0"
                                 Content="Activated"
                                 IsChecked="{Binding Path=IsActivated, Mode=TwoWay}" />
                             <CheckBox
+                                Margin="10,0,0,0"
                                 Grid.Column="1"
                                 Content="Waiting"
                                 IsEnabled="False"
                                 IsChecked="{Binding Path=IsSelected, Mode=TwoWay}" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                Grid.Column="2"
+                                IsEnabled="False"
+                                Text="{Binding Path=Count, Mode=TwoWay}"
+                                />
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

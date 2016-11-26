@@ -7,10 +7,12 @@ namespace Sync
     {
         public event EventHandler Blocked;
         public event EventHandler Released;
-
+        
         private readonly ManualResetEvent resetEvent = new ManualResetEvent(false);
 
         public bool IsActivated { get; private set; }
+
+        public int Count { get; private set; }
 
         public SyncPoint()
         {
@@ -19,19 +21,12 @@ namespace Sync
 
         public void Wait()
         {
-            var handler = this.Blocked;
-            if(handler != null)
-            {
-                handler(this, new EventArgs());
-            }
+            this.Count++;
+            this.Blocked?.Invoke(this, new EventArgs());
 
             this.resetEvent.WaitOne();
 
-            handler = this.Released;
-            if(handler != null)
-            {
-                handler(this, new EventArgs());
-            }
+            this.Released?.Invoke(this, new EventArgs());
         }
 
         public void Release()
