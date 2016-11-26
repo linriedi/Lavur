@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ListView ItemsSource="{Binding AllActivities}">
+        <ListView ItemsSource="{Binding SyncPoints}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

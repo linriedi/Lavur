@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Sync;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,24 +7,16 @@ namespace Service
 {
     public class Service
     {
-        public event EventHandler FirstSignaled;
-
         public Service()
         {
             Task.Run(() =>
             {
                 while (true)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(500);
                     Debug.WriteLine("Hallo 1");
 
-                    Sync.SyncPointConnection.First.Wait();
-
-                    var handler = this.FirstSignaled;
-                    if(handler != null)
-                    {
-                        handler(this, new EventArgs());
-                    }
+                    SyncPointConnection.First.Wait();
                 }
             });
 
@@ -35,8 +24,10 @@ namespace Service
             {
                 while (true)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                     Debug.WriteLine("Hallo 2");
+
+                    SyncPointConnection.Second.Wait();
                 }
             });
 
@@ -44,8 +35,10 @@ namespace Service
             {
                 while (true)
                 {
-                    Thread.Sleep(5000);
+                    Thread.Sleep(500);
                     Debug.WriteLine("Hallo 3");
+
+                    SyncPointConnection.Third.Wait();
                 }
             });
 
@@ -53,8 +46,10 @@ namespace Service
             {
                 while (true)
                 {
-                    Thread.Sleep(3658);
+                    Thread.Sleep(500);
                     Debug.WriteLine("Hallo 4");
+
+                    SyncPointConnection.Fourth.Wait();
                 }
             });
         }

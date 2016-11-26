@@ -1,11 +1,14 @@
 ﻿using System.Windows;
 using System.Collections.ObjectModel;
+using Sync;
+using System.Reflection;
+using System.Linq;
 
 namespace BackEndWpf
 {
     public partial class MainWindow : Window
     {
-        public ObservableCollection<ViewModel> AllActivities { get; set; }
+        public ObservableCollection<ViewModel> SyncPoints { get; set; }
 
         private readonly Service.Service service;
 
@@ -15,20 +18,22 @@ namespace BackEndWpf
 
             this.DataContext = this;
             this.service = new Service.Service();
-            this.AllActivities = new ObservableCollection<ViewModel>();
+            this.SyncPoints = new ObservableCollection<ViewModel>();
                       
             this.CreateList();
         }
 
         private void CreateList()
         {
-            var point = Sync.SyncPointConnection.First;
-            AllActivities.Add(new ViewModel(point));
+            var pointInfos = typeof(SyncPointConnection)
+                .GetFields(BindingFlags.Static | BindingFlags.Public);
 
-            //foreach (var activity in this.viewModels)
-            //{
-            //    AllActivities.Add(activity);
-            //}
+            foreach(var info in pointInfos)
+            {
+                var point = (SyncPoint)info.GetValue(null);
+                var fieldName = info.Name;
+                SyncPoints.Add(new ViewModel(fieldName, point));
+            }
         }
     }
 }

@@ -47,10 +47,10 @@ namespace BackEndWpf
             }
         }
 
-        public ViewModel(SyncPoint point)
+        public ViewModel(string name, SyncPoint point)
         {
             this.point = point;
-            this.Name = "First";
+            this.Name = name;
 
             point.Blocked += OnBlocked;
             point.Released += OnReleased;
