@@ -10,6 +10,8 @@ namespace BackEnd
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Backend started");
+            Console.Read();
         }
     }
 }
